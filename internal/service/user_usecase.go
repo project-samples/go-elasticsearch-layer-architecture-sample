@@ -2,7 +2,7 @@ package service
 
 import (
 	"context"
-	. "github.com/core-go/core"
+	. "github.com/core-go/elasticsearch"
 
 	. "go-service/internal/model"
 )
@@ -17,7 +17,7 @@ type UserUsecase struct {
 
 func (s *UserUsecase) Load(ctx context.Context, id string) (*User, error) {
 	var user User
-	ok, err := s.repository.LoadAndDecode(ctx, id, &user)
+	ok, err := s.repository.Get(ctx, id, &user)
 	if !ok {
 		return nil, err
 	} else {
